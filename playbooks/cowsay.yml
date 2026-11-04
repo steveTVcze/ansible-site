@@ -1,0 +1,14 @@
+---
+- name: Instalace cowsay na server
+  hosts: ori
+  become: true
+  tasks:
+    - name: Pridat repozitar EPEL
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+
+    - name: Nainstalovat balicek cowsay
+      ansible.builtin.dnf:
+        name: cowsay
+        state: present

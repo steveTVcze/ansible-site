@@ -1,0 +1,16 @@
+---
+- name: Sprava uzivatelu a klíčů
+  hosts: ori
+  become: true
+  tasks:
+    - name: Definovani uzivatele
+      ansible.builtin.user:
+        name: "{{ moje_jmeno }}"
+        state: present
+
+    - name: Nastaveni SSH klicu
+      ansible.posix.authorized_key:
+        user: "{{ moje_jmeno }}"
+        key: "{{ moje_ssh_klice | join('\n') }}"
+        state: present
+        exclusive: true
